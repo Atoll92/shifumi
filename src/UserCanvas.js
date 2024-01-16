@@ -13,22 +13,7 @@ const UserCanvas = ({ userChoice }) => {
   const canvasRef = useRef();
 
 
-// useEffect(() => {
 
-
-//   const canvas = canvasRef.current.domElement;
-//   canvas.addEventListener(
-//         'webglcontextlost',
-//         function (event) {
-//           event.preventDefault();
-//           setTimeout(function () {
-//             renderer.forceContextRestore();
-//           }, 1);
-//         },
-//         false
-//       );
-    
-//    }, []);
 
   return (
     <Canvas ref={canvasRef} key={userChoice} camera={{ position: [0.2, 0.2, 0.5] }} shadows>

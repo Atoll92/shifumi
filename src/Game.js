@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Stats, Circle } from '@react-three/drei';
+import { Stats, Circle, Loader } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
-import { Typography, Button, Grid, Card } from '@mui/material';
+import { Typography, Button, Grid, Card, CircularProgress } from '@mui/material';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import UserCanvas from './UserCanvas';
 import ComputerCanvas from './ComputerCanvas';
-
+import circularProgressClasses from '@mui/material';
 import BubbleChart from './BarChart';
 import DonutChart from './DonutChart';
 import { color } from 'd3';
 import { blue } from '@mui/material/colors';
 import BarChart from './BarChart';
+import { Suspense } from 'react';
+import GameScene from './GameScene';
 
 const Game = () => {
   const [userChoice, setUserChoice] = useState(null);
@@ -25,12 +27,7 @@ const Game = () => {
   const [userchoiceCounts, setUserChoiceCounts] = useState({});
   const [computerchoiceCounts, setComputerChoiceCounts] = useState({});
 
-  
-  const rock = useLoader(GLTFLoader, '/models/rock.glb');
-  const paper = useLoader(GLTFLoader, '/models/paper-bag.glb');
-  const scissors = useLoader(GLTFLoader, '/models/scissors.glb');
-  const userCanvasRef = useRef();
-  const computerCanvasRef = useRef();
+
 
   
   const handleChoice = (choice) => {
@@ -88,15 +85,10 @@ const Game = () => {
     <div style={canvasStyle} class="flex flex-col">
  
  <div className="flex-1 flex flex-row m-auto justify-center  p-4">
- <div className="flex-1 flex flex-row m-auto justify-center  p-4">          {/* User's Canvas */}
-          {userChoice && <UserCanvas userChoice={userChoice}  />}
-        </div>
+ 
+ <Suspense>{userChoice && computerChoice && <GameScene userChoice={userChoice} computerChoice={computerChoice} />}</Suspense>
 
-        <div className="flex-1 flex flex-row m-auto justify-center  p-4">          {/* Computer's Canvas */}
-          {computerChoice && (
-            <ComputerCanvas computerChoice={computerChoice} />
-          )}
-        </div>
+        
       </div>
 
  
