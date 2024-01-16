@@ -13,8 +13,8 @@ function Navbar({session}) {
   const MenuItems = ["Play", "The rules", "About"];
 
 
-const listItems = MenuItems.map((item) => (
-  <li className="px-3 py-2 cursor-pointer rounded hover:text-sky-700" >
+const listItems = MenuItems.map((item, i) => (
+  <li key={i} className="px-3 py-2 cursor-pointer rounded hover:text-sky-700" >
     {item}
   </li>
 ));
