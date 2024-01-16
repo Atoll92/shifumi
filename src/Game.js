@@ -38,17 +38,7 @@ const Game = () => {
     setComputerChoice(computerChoice);
     setUserChoice(choice);
   
-    // Update choices with counts
-    // setPlayerChoices((prevPlayerChoices) => {
-    //   // Use the functional form to ensure the latest state
-    //   return [...prevPlayerChoices, { choice, count: 1 }];
-    // });
-  
-    // setComputerChoices((prevComputerChoices) => {
-    //   // Use the functional form to ensure the latest state
-    //   return [...prevComputerChoices, { choice: computerChoice, count: 1 }];
-    // });
-  
+
     setUserChoiceCounts((prevCounts) => {
       const updatedCounts = { ...prevCounts };
       updatedCounts[choice] = (updatedCounts[choice] || 0) + 1;
@@ -87,29 +77,6 @@ const Game = () => {
     console.log('Computer Choice Counts:', computerchoiceCounts);
 
   }, [ userchoiceCounts, computerchoiceCounts]);
-  
-  
-  // Helper function to count choices
- // Helper function to count player choices
-// const countPlayerChoices = (choices) => {
-//   const counts = choices.reduce((acc, choice) => {
-//     const key = choice.choice || choice; // Handle objects and strings
-//     acc[key] = (acc[key] || 0) + 1;
-//     return acc;
-//   }, {});
-//   return Object.entries(counts).map(([choice, count]) => ({ choice, count }));
-// };
-
-// // Helper function to count computer choices
-// const countComputerChoices = (choices) => {
-//   const counts = choices.reduce((acc, choice) => {
-//     const key = choice.choice || choice; // Handle objects and strings
-//     acc[key] = (acc[key] || 0) + 1;
-//     return acc;
-//   }, {});
-//   return Object.entries(counts).map(([choice, count]) => ({ choice, count }));
-// };
-
   
  
 
