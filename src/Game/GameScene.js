@@ -29,10 +29,6 @@ const GameScene = ({ userChoice, computerChoice, isUserLosing, isComputerLosing 
                 isLosing={isComputerLosing}
                 onAnimationReset={handleAnimationReset}
             />
-
-            <Circle args={[10]} rotation-x={-Math.PI / 2} receiveShadow>
-                <meshStandardMaterial transparent opacity={0} />
-            </Circle>
             <axesHelper args={[5]} />
             <Stats />
         </Canvas>
