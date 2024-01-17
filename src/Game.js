@@ -5,13 +5,9 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import { Typography, Button, Grid, Card, CircularProgress } from '@mui/material';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
-import UserCanvas from './UserCanvas';
-import ComputerCanvas from './ComputerCanvas';
-import circularProgressClasses from '@mui/material';
-import BubbleChart from './BarChart';
+import Notification from './ResultNotification';
 import DonutChart from './DonutChart';
-import { color } from 'd3';
-import { blue } from '@mui/material/colors';
+
 import BarChart from './BarChart';
 import { Suspense } from 'react';
 import GameScene from './GameScene';
@@ -22,6 +18,8 @@ const Game = () => {
   const [result, setResult] = useState(null);
   const [wins, setWins] = useState(0);
   const [losses, setLosses] = useState(0);
+  const [isUserLosing, setIsUserLosing] = useState(false);
+  const [isComputerLosing, setIsComputerLosing] = useState(false);
   // const [playerChoices, setPlayerChoices] = useState([]);
   // const [computerChoices, setComputerChoices] = useState([]);
   const [userchoiceCounts, setUserChoiceCounts] = useState({});
@@ -58,12 +56,23 @@ const Game = () => {
     ) {
       setResult('You win!');
       setWins((prevWins) => prevWins + 1);
+      
     } else {
       setResult('Computer wins!');
       setLosses((prevLosses) => prevLosses + 1);
     }
   };
-  
+  useEffect(() => {
+    // Check the result and set losing states accordingly
+    if (result === 'You win!') {
+        setIsComputerLosing(true);
+    } else if (result === 'Computer wins!') {
+        setIsUserLosing(true);
+    } else {
+        setIsUserLosing(false);
+        setIsComputerLosing(false);
+    }
+}, [result]);
   
 
  useEffect(() => {
@@ -81,43 +90,43 @@ const Game = () => {
   const UiStyle = { background: '#1B1B33' , color:'white' , padding:'20px' };
 
   return (
-
-    <div style={canvasStyle} class="flex flex-col">
+<div className='flex flex-row'>
+    <div style={canvasStyle} class="flex flex-col w-4/5">
  
- <div className="flex-1 flex flex-row m-auto justify-center  p-4">
+ <div className="flex-1 flex flex-row justify-center bg-slate-400 h-500  p-4">
  
- <Suspense>{userChoice && computerChoice && <GameScene userChoice={userChoice} computerChoice={computerChoice} />}</Suspense>
+ <Suspense fallback={<Loader />}>{userChoice && computerChoice && ( <>
+                <GameScene userChoice={userChoice} computerChoice={computerChoice} isUserLosing={isUserLosing} isComputerLosing={isComputerLosing} />
+                <Notification result={result}  />
+              </> ) }
+              </Suspense>
 
         
       </div>
 
  
- <div className="flex-1 flex flex-row  p-4  m-auto">
+ {/* <div className="flex-1 flex flex-row  p-4  m-auto"> */}
         <Card style={UiStyle}>    
-          <Grid  container spacing={2}>
-            <Grid item xs={12}>
-              <Typography variant="body1">
-                Your choice: {userChoice}
-              </Typography>
-              <Typography variant="body1">
-                Computer's choice: {computerChoice}
-              </Typography>
-              <Typography variant="body1">{result}</Typography>
-            </Grid>
-            <Grid item xs={12}>
+          
+            <Grid item xs={12} spacing={2}>
               {['rock', 'paper', 'scissors'].map((choice) => (
-                <Button key={choice} variant="contained" onClick={() => handleChoice(choice)}>
+                <Button key={choice} variant="outlined" onClick={() => handleChoice(choice)}>
                   {choice}
                 </Button>
               ))}
             </Grid>
-          </Grid>
+        
         </Card> 
-
-      <DonutChart wins={wins} losses={losses} />
-      <BarChart userChoiceCounts={userchoiceCounts} computerChoiceCounts={computerchoiceCounts} />
+             
+     
+     
       {/* <BarChart playerChoices={playerChoices} computerChoices={computerChoices} /> */}
-            </div>
+            {/* </div> */}
+    </div>
+    <div className='w-1/5 pt-6'>
+            <DonutChart wins={wins} losses={losses} />
+      <BarChart userChoiceCounts={userchoiceCounts} computerChoiceCounts={computerchoiceCounts} />
+      </div>
     </div>
   );
 };
