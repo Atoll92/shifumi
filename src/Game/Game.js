@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Loader } from '@react-three/drei';
 import { Button, Grid, Card, CircularProgress } from '@mui/material';
-import Notification from './ResultNotification';
-import DonutChart from './DonutChart';
-import BarChart from './BarChart';
+import Notification from '../Services/ResultNotification';
+// import DonutChart from '../UI/DonutChart';
+import BarChart from '../UI/BarChart';
 import { Suspense } from 'react';
 import GameScene from './GameScene';
+import DonutChart from '../UI/DonutChart';
+
 
 const Game = () => {
   const [userChoice, setUserChoice] = useState(null);
