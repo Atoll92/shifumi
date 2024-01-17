@@ -9,14 +9,22 @@ const RotatingAnimatedModel = ({ model, initialPosition, isLosing, onAnimationRe
 
     useFrame(() => {
         // Check if the model is losing
-        // if (isLosing) {
-        //   // Explode effect: increase scale and move away from the center
+        if (isLosing) {
+          // Explode effect: increase scale and move away from the center
         //   meshRef.current.position.x += (5 - meshRef.current.position.x) * 0.05;
-        //   // Additional logic for the removal
+          // Additional logic for the removal
         //   if (meshRef.current.position.distanceTo(new THREE.Vector3(5, 0, 0)) < 0.1) {
         //     setShouldRemove(true);
-        //   }
-        // } else {
+
+        meshRef.current.rotation.x += 0.005;
+        meshRef.current.rotation.y += 0.005;
+        // Move the model towards [0, 0, 0]
+        meshRef.current.position.x += (0 - meshRef.current.position.x) * 0.05;
+        meshRef.current.position.y += (0 - meshRef.current.position.y) * 0.05;
+        meshRef.current.position.z += (0 - meshRef.current.position.z) * 0.05;
+          }
+        // }
+         else {
         // Rotate the model slowly on both the x and y axes
         meshRef.current.rotation.x += 0.005;
         meshRef.current.rotation.y += 0.005;
@@ -24,7 +32,7 @@ const RotatingAnimatedModel = ({ model, initialPosition, isLosing, onAnimationRe
         meshRef.current.position.x += (0 - meshRef.current.position.x) * 0.05;
         meshRef.current.position.y += (0 - meshRef.current.position.y) * 0.05;
         meshRef.current.position.z += (0 - meshRef.current.position.z) * 0.05;
-        // }
+        }
     });
 
     useEffect(() => {

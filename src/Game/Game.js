@@ -7,6 +7,9 @@ import BarChart from '../UI/BarChart';
 import { Suspense } from 'react';
 import GameScene from './GameScene';
 import DonutChart from '../UI/DonutChart';
+import rockSvg from '../Assets/svgs/rock.svg';
+import paperSvg from '../Assets/svgs/paper.svg';
+import scissorsSvg from '../Assets/svgs/scissors.svg';
 
 
 const Game = () => {
@@ -94,8 +97,22 @@ const Game = () => {
 
         </div>
 
-
         <Card style={UiStyle}>
+          <Grid item xs={12} spacing={2}>
+            {[
+              { choice: 'rock', svg: rockSvg },
+              { choice: 'paper', svg: paperSvg },
+              { choice: 'scissors', svg: scissorsSvg },
+            ].map(({ choice, svg }) => (
+              <Button key={choice} variant="outlined" onClick={() => handleChoice(choice)}>
+                <img src={svg} alt={choice} width="24" height="24" />
+                {choice}
+              </Button>
+            ))}
+          </Grid>
+        </Card>
+
+        {/* <Card style={UiStyle}>
 
           <Grid item xs={12} spacing={2}>
             {['rock', 'paper', 'scissors'].map((choice) => (
@@ -105,7 +122,7 @@ const Game = () => {
             ))}
           </Grid>
 
-        </Card>
+        </Card> */}
 
       </div>
 
