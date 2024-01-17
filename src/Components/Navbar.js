@@ -1,6 +1,6 @@
 // "use client";
 import React, { useState } from "react";
-import logo from './logo.svg';
+import logo from '../Assets/logo.svg'
 
 function Navbar({ session }) {
 
