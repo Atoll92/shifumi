@@ -1,7 +1,7 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Label } from 'recharts';
 
-const COLORS = ['#0088FE', '#FF8042']; // You can change these colors as needed
+const COLORS = ['#0088FE', '#FF8042'];
 
 const DonutChart = ({ wins, losses }) => {
   const data = [
@@ -9,7 +9,7 @@ const DonutChart = ({ wins, losses }) => {
     { name: 'Losses', value: losses },
   ];
 
-  
+
 
   return (
     <ResponsiveContainer width="100%" height={200}>

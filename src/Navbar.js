@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import logo from './logo.svg';
 
-function Navbar({session}) {
-  
+function Navbar({ session }) {
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -13,18 +13,18 @@ function Navbar({session}) {
   const MenuItems = ["Play", "The rules", "About"];
 
 
-const listItems = MenuItems.map((item, i) => (
-  <li key={i} className="px-3 py-2 cursor-pointer rounded hover:text-sky-700" >
-    {item}
-  </li>
-));
+  const listItems = MenuItems.map((item, i) => (
+    <li key={i} className="px-3 py-2 cursor-pointer rounded hover:text-sky-700" >
+      {item}
+    </li>
+  ));
 
   return (
     <div className="container relative m-auto p-3 flex justify-between items-center">
       <div>
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="text-4xl font-bold text-sky-800">SHIFUMI</h1>
-     </div>
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1 className="text-4xl font-bold text-sky-800">SHIFUMI</h1>
+      </div>
       <nav className={isOpen ? ("flex") : (" hidden md:flex")}>
         <ul className="flex bg-inherit absolute md:relative flex-col md:flex-row w-full shadow md:shadow-none text-center top-12 left-0 md:top-0 md:flex">{listItems}</ul>
       </nav>
