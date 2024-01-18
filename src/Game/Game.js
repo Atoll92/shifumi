@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Loader } from '@react-three/drei';
 import { Suspense } from 'react';
 import GameScene from './GameScene';
@@ -9,7 +9,6 @@ import ComputerBarChart from '../Dataviz/ComputerBarChart';
 import RestartButton from '../Services/Restart';
 import MuteButton from './MuteButton';
 import { Stack } from '@mui/material';
-import { Grid } from '@mui/material';
 import { Typography } from '@mui/material';
 import tie from '../Assets/sounds/tie.mp3';
 import win from '../Assets/sounds/win.mp3';
@@ -25,7 +24,6 @@ const Game = () => {
   const [losses, setLosses] = useState(0);
   const [userchoiceCounts, setUserChoiceCounts] = useState({});
   const [computerchoiceCounts, setComputerChoiceCounts] = useState({});
-  const [consecutiveWins, setConsecutiveWins] = useState(0);
   const [controlsKey, setControlsKey] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
 
@@ -58,7 +56,6 @@ const Game = () => {
     if (choice === computerChoice) { //tie
       setResult("tie");
       if(!isMuted){sounds.tie.play()}
-      setConsecutiveWins(0);
     } else if (
       (choice === 'rock' && computerChoice === 'scissors') ||
       (choice === 'paper' && computerChoice === 'rock') ||
@@ -67,14 +64,11 @@ const Game = () => {
       setResult('win');
       if(!isMuted){sounds.win.play()}
       setWins((prevWins) => prevWins + 1);
-      setConsecutiveWins((prevConsecutiveWins) => prevConsecutiveWins + 1);
-
-
-    } else { //lose
+      }
+      else { //lose
       setResult('lose');
       if(!isMuted){sounds.lose.play()}
       setLosses((prevLosses) => prevLosses + 1);
-      setConsecutiveWins(0);
     }
     
   };
@@ -98,7 +92,7 @@ const Game = () => {
         <UserBarChart userChoiceCounts={userchoiceCounts} />
       </div>
       <div className="flex flex-col w-full lg:w-3/5 order-first md:order-0 lg:order-0 ">
-        <Grid container className="absolute w-full m-auto" spacing={2}>
+        {/* <Grid container className="absolute w-3/5 m-auto" spacing={2}>
           <Grid item xs={6} textAlign="left" className='mx-4 lg:mx0 w-1/2'>
             <Typography variant="h4" component="div" style={{ fontWeight: 'bold', color: '#0088fe', margin:'20px' }}>
               Player
@@ -109,13 +103,21 @@ const Game = () => {
               A.I.
             </Typography>
           </Grid>
-        </Grid>
+        </Grid> */}
         <div className="flex-1 flex flex-row justify-center z-10 p-4 ">
           <Suspense fallback={<Loader />}>{userChoice && computerChoice && (<>
             <GameScene userChoice={userChoice} computerChoice={computerChoice} result={result} />
           </>)}
           </Suspense>
-        </div>
+          <Typography  className="w-full lg:w-3/5 mx-2 lg:mx-0 order-first" variant="h5" component="div" style={{ fontWeight: 'bold', color: '#0088fe', margin:'20px 20px  ' , position:'absolute', textAlign:'left'}}>
+              Player
+            </Typography>
+          <Typography  className="w-full lg:w-3/5 mx-2 lg:mx-0 order-first md:order-0" variant="h5" component="div" style={{ fontWeight: 'bold', color: '#ff8042', margin:'20px 20px' , position:'absolute', textAlign:'right'}}>
+              Computer
+            </Typography>
+        </div><>
+        
+            </>
         <DonutChart wins={wins} losses={losses} />
         <Controls key={controlsKey} className="m-auto" UiStyle={UiStyle} handleChoice={handleChoice} isMuted={isMuted} onToggleMute={handleToggleMute} />
         <Stack style={{ flexDirection: 'row' }} className='m-auto flex flex-row w-1/2 h-48' spacing={2}>
