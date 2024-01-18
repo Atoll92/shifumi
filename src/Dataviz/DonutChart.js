@@ -14,27 +14,27 @@ const DonutChart = ({ wins, losses }) => {
 
   return (
     <div className={"absolute left-0 w-full"}>
-    <ResponsiveContainer width="100%" height={300}>
-      <PieChart>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="70%"
-          innerRadius={70}
-          outerRadius={90}
-          fill="#8884d8"
-          paddingAngle={5}
-          dataKey="value"
-          labelLine={false}
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-          <Label position="center" content={<CustomLabel data={data} />} />
-        </Pie>
-        <Tooltip />
-      </PieChart>
-    </ResponsiveContainer>
+      <ResponsiveContainer width="100%" height={300}>
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="70%"
+            innerRadius={70}
+            outerRadius={90}
+            fill="#8884d8"
+            paddingAngle={5}
+            dataKey="value"
+            labelLine={false}
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+            <Label position="center" content={<CustomLabel data={data} />} />
+          </Pie>
+          <Tooltip />
+        </PieChart>
+      </ResponsiveContainer>
     </div>
   );
 };
@@ -56,9 +56,20 @@ const CustomLabel = ({ data }) => (
         fill={COLORS[index % COLORS.length]}
         fontSize="63px"
       >
+         {/* {`${index === 0 ? 'Player' : ''}`}  */}
         {`${entry.value}`}
-      </text>
+        {/* {`${index === 0 ? '' : 'A.I.'}`}  */}
+             </text>
     ))}
+    {/* <text
+     key={`playerlabel`}
+     x={'35%'}
+     y={`20%`}
+     textAnchor="middle"
+     dominantBaseline="middle"
+     fill={"#0088FE"}
+     fontSize="63px"
+     >Player</text> */}
   </g>
 );
 

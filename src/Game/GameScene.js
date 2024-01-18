@@ -3,14 +3,14 @@
 import React, { useMemo } from 'react';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
-import { Stats , Text} from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import RotatingAnimatedModel from './RotatingAnimatedModel';
 import PropTypes from 'prop-types';
 
 const GameScene = ({ userChoice, computerChoice, result }) => {
     const userModel = useGltfScene(userChoice);
     const computerModel = useGltfScene(computerChoice);
-    const Canvas_height = { height: '400px'  };
+    const Canvas_height = { height: '400px' };
 
     return (
         <Canvas style={Canvas_height} className="z-10" camera={{ position: [0, 0, 1.2] }} shadows>
@@ -29,6 +29,7 @@ const GameScene = ({ userChoice, computerChoice, result }) => {
                 position={[0, -0.8, 0]}
                 color="#075985"
                 fontSize={0.2}
+                fontWeight={900}
                 maxWidth={300}
                 lineHeight={1.5}
                 letterSpacing={0.02}
@@ -36,16 +37,15 @@ const GameScene = ({ userChoice, computerChoice, result }) => {
             >
                 {getResultMessage(result)}
             </Text>
-            <Stats />
         </Canvas>
     );
 };
 
 GameScene.propTypes = {
     userChoice: PropTypes.string.isRequired,
-    computerChoice : PropTypes.string.isRequired,
-    result : PropTypes.string.isRequired,
-  };
+    computerChoice: PropTypes.string.isRequired,
+    result: PropTypes.string.isRequired,
+};
 
 
 
