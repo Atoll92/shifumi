@@ -88,6 +88,7 @@ const Game = () => {
     } 
     if (consecutiveWins >= 3) {
       setNotificationMessage('survivor level II : triple win streak !');
+      setConsecutiveWins(0);
       
     } 
     else {
