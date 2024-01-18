@@ -11,10 +11,10 @@ import RestartButton from '../Services/Restart';
 import GameResultSound from './GameResultSound';
 import MuteButton from './MuteButton';
 import { Stack } from '@mui/material';
+import { Grid } from '@mui/material';
+import { Typography } from '@mui/material';
 
-
-
-
+// 
 
 const Game = () => {
   const [userChoice, setUserChoice] = useState(null);
@@ -27,16 +27,11 @@ const Game = () => {
   const [consecutiveWins, setConsecutiveWins] = useState(0);
   const [notificationMessage, setNotificationMessage] = useState(null);
   const [controlsKey, setControlsKey] = useState(0);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   const handleToggleMute = () => {
     setIsMuted((prevIsMuted) => !prevIsMuted);
   };
-
-
-
-
-
 
   const handleChoice = (choice) => {
     const computerChoice = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)];
@@ -86,30 +81,20 @@ const Game = () => {
     setControlsKey((prevKey) => prevKey + 1);
   };
 
-
-
-
-
-
   useEffect(() => {
     console.log('User Choice Counts:', userchoiceCounts);
     console.log('Computer Choice Counts:', computerchoiceCounts);
     if (consecutiveWins >= 2) {
       setNotificationMessage('level I');
-
     }
     if (consecutiveWins >= 3) {
       setNotificationMessage('survivor level II : triple win streak !');
       setConsecutiveWins(0);
-
     }
     else {
       setNotificationMessage(null);
     }
   }, [userchoiceCounts, computerchoiceCounts, consecutiveWins]);
-
-
-
   const UiStyle = { background: 'transparent', color: 'white', padding: '20px', margin: 'auto' };
 
   return (
@@ -118,32 +103,34 @@ const Game = () => {
         <UserBarChart userChoiceCounts={userchoiceCounts} />
       </div>
       <div className="flex flex-col w-full lg:w-3/5 order-first md:order-0 lg:order-0 ">
-
+        <Grid container spacing={2}>
+          <Grid item xs={6} textAlign="left" className='mx-4 lg:mx0'>
+            <Typography variant="h4" component="div" style={{ fontWeight: 'bold', color: '#0088fe', margin:'20px' }}>
+              Player
+            </Typography>
+          </Grid>
+          <Grid item xs={6} textAlign="right">
+            <Typography variant="h4" component="div" style={{ fontWeight: 'bold', color: '#ff8042', margin:'20px' }}>
+              A.I.
+            </Typography>
+          </Grid>
+        </Grid>
         <div className="flex-1 flex flex-row justify-center z-10 p-4 ">
-
           <Suspense fallback={<Loader />}>{userChoice && computerChoice && (<>
             <GameScene userChoice={userChoice} computerChoice={computerChoice} result={result} />
           </>)}
           </Suspense>
-
-
         </div>
-
         <DonutChart wins={wins} losses={losses} />
-
         <Controls key={controlsKey} className="m-auto" UiStyle={UiStyle} handleChoice={handleChoice} isMuted={isMuted} onToggleMute={handleToggleMute} />
         <Stack style={{ flexDirection: 'row' }} className='m-auto flex flex-row w-1/2 h-48' spacing={2}>
           <RestartButton onRestart={handleRestart} />
           <MuteButton isMuted={isMuted} onToggleMute={handleToggleMute} />
         </Stack>
-
         <Notification result={notificationMessage} onClose={() => setNotificationMessage(null)} />
         <GameResultSound result={result} isMuted={isMuted} />
       </div>
-
-
-      <div className='w-full flex lg:w-1/5 pt-0 md:pt-48'>
-
+      <div className='w-full flex lg:w-1/5 pt-0 lg:pt-48'>
         <ComputerBarChart userChoiceCounts={userchoiceCounts} computerChoiceCounts={computerchoiceCounts} />
       </div>
     </div>
