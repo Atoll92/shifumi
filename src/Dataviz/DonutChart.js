@@ -12,12 +12,13 @@ const DonutChart = ({ wins, losses }) => {
 
 
   return (
-    <ResponsiveContainer width="100%" height={200}>
+    <div className={"absolute left-0 w-full"}>
+    <ResponsiveContainer width="100%" height={300}>
       <PieChart>
         <Pie
           data={data}
           cx="50%"
-          cy="50%"
+          cy="70%"
           innerRadius={70}
           outerRadius={90}
           fill="#8884d8"
@@ -33,6 +34,7 @@ const DonutChart = ({ wins, losses }) => {
         <Tooltip />
       </PieChart>
     </ResponsiveContainer>
+    </div>
   );
 };
 
@@ -41,12 +43,12 @@ const CustomLabel = ({ data }) => (
     {data.map((entry, index) => (
       <text
         key={`label-${index}`}
-        x={index === 0 ? '40%' : '60%'}
-        y={`50%`}
+        x={index === 0 ? '35%' : '65%'}
+        y={`20%`}
         textAnchor="middle"
         dominantBaseline="middle"
         fill={COLORS[index % COLORS.length]}
-        fontSize="20px"
+        fontSize="63px"
       >
         {`${entry.value}`}
       </text>

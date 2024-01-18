@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Loader } from '@react-three/drei';
-import { Button, Grid, Card, CircularProgress } from '@mui/material';
 import Notification from '../Services/ResultNotification';
-// import DonutChart from '../UI/DonutChart';
-import BarChart from '../UI/BarChart';
 import { Suspense } from 'react';
 import GameScene from './GameScene';
-import DonutChart from '../UI/DonutChart';
-import rockSvg from '../Assets/svgs/rock.svg';
-import paperSvg from '../Assets/svgs/paper.svg';
-import scissorsSvg from '../Assets/svgs/scissors.svg';
+import DonutChart from '../Dataviz/DonutChart';
+import Controls from './Controls';
+import UserBarChart from '../Dataviz/UserBarChart';
+import ComputerBarChart from '../Dataviz/ComputerBarChart';
+import RestartButton from '../Services/Restart';
+
 
 
 const Game = () => {
   const [userChoice, setUserChoice] = useState(null);
   const [computerChoice, setComputerChoice] = useState(null);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState(null); // 'win', 'lose', or "tie"
   const [wins, setWins] = useState(0);
   const [losses, setLosses] = useState(0);
-  const [isUserLosing, setIsUserLosing] = useState(false);
-  const [isComputerLosing, setIsComputerLosing] = useState(false);
   const [userchoiceCounts, setUserChoiceCounts] = useState({});
   const [computerchoiceCounts, setComputerChoiceCounts] = useState({});
+  const [consecutiveWins, setConsecutiveWins] = useState(0);
+  const [notificationMessage, setNotificationMessage] = useState(null);
+
 
 
 
@@ -30,7 +30,6 @@ const Game = () => {
     const computerChoice = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)];
     setComputerChoice(computerChoice);
     setUserChoice(choice);
-
 
     setUserChoiceCounts((prevCounts) => {
       const updatedCounts = { ...prevCounts };
@@ -44,91 +43,89 @@ const Game = () => {
     });
 
     if (choice === computerChoice) {
-      setResult("It's a tie!");
+      setResult("tie");
     } else if (
       (choice === 'rock' && computerChoice === 'scissors') ||
       (choice === 'paper' && computerChoice === 'rock') ||
       (choice === 'scissors' && computerChoice === 'paper')
     ) {
-      setResult('You win!');
+      setResult('win');
       setWins((prevWins) => prevWins + 1);
 
     } else {
-      setResult('Computer wins!');
+      setResult('lose');
       setLosses((prevLosses) => prevLosses + 1);
     }
-  };
-  useEffect(() => {
-    // Check the result and set losing states accordingly
-    if (result === 'You win!') {
-      setIsComputerLosing(true);
-    } else if (result === 'Computer wins!') {
-      setIsUserLosing(true);
+    if (result === 'win') {
+      setConsecutiveWins((prevConsecutiveWins) => prevConsecutiveWins + 1);
     } else {
-      setIsUserLosing(false);
-      setIsComputerLosing(false);
+      setConsecutiveWins(0);
     }
-  }, [result]);
+  };
+
+  const handleRestart = () => {
+    setUserChoice(null);
+    setComputerChoice(null);
+    setResult(null);
+    setWins(0);
+    setLosses(0);
+    setUserChoiceCounts({});
+    setComputerChoiceCounts({});
+  };
+
+
+
+
 
 
   useEffect(() => {
     console.log('User Choice Counts:', userchoiceCounts);
     console.log('Computer Choice Counts:', computerchoiceCounts);
+    if (consecutiveWins >= 2) {
+      setNotificationMessage(result);
+      
+    } 
+    if (consecutiveWins >= 3) {
+      setNotificationMessage('survivor level II : triple win streak !');
+      
+    } 
+    else {
+      setNotificationMessage(null);
+    }
+  }, [userchoiceCounts, computerchoiceCounts, consecutiveWins]);
 
-  }, [userchoiceCounts, computerchoiceCounts]);
 
 
-
-  const canvasStyle = { background: '#282c34' };
-  const UiStyle = { background: '#1B1B33', color: 'white', padding: '20px' };
+  const UiStyle = { background: 'transparent', color: 'white', padding: '20px', margin:'auto' };
 
   return (
-    <div className='flex lg:flex-row  flex-col'>
-      <div style={canvasStyle} class="flex flex-col w-full lg:w-4/5">
+    <div className='flex lg:flex-row  pt-5 flex-col bg-orange-50'>
+      <div className='w-1/2 flex lg:w-1/5 pt-48 md:flex-col-reverse"'>
+            <UserBarChart userChoiceCounts={userchoiceCounts} />
+      </div>
+      <div  className="flex flex-col w-full lg:w-3/5 md:order-fast ">
 
-        <div className="flex-1 flex flex-row justify-center bg-slate-400 h-500  p-4">
-
+        <div className="flex-1 flex flex-row justify-center z-10 p-4">
+          
           <Suspense fallback={<Loader />}>{userChoice && computerChoice && (<>
-            <GameScene userChoice={userChoice} computerChoice={computerChoice} isUserLosing={isUserLosing} isComputerLosing={isComputerLosing} />
-            <Notification result={result} />
+            <GameScene userChoice={userChoice} computerChoice={computerChoice} result={result} />
           </>)}
           </Suspense>
 
 
         </div>
 
-        <Card style={UiStyle}>
-          <Grid item xs={12} spacing={2}>
-            {[
-              { choice: 'rock', svg: rockSvg },
-              { choice: 'paper', svg: paperSvg },
-              { choice: 'scissors', svg: scissorsSvg },
-            ].map(({ choice, svg }) => (
-              <Button key={choice} variant="outlined" onClick={() => handleChoice(choice)}>
-                <img src={svg} alt={choice} width="24" height="24" />
-                {choice}
-              </Button>
-            ))}
-          </Grid>
-        </Card>
+        <DonutChart wins={wins} losses={losses} />
 
-        {/* <Card style={UiStyle}>
-
-          <Grid item xs={12} spacing={2}>
-            {['rock', 'paper', 'scissors'].map((choice) => (
-              <Button key={choice} variant="outlined" onClick={() => handleChoice(choice)}>
-                {choice}
-              </Button>
-            ))}
-          </Grid>
-
-        </Card> */}
+        <Controls className="m-auto" UiStyle={UiStyle} handleChoice={handleChoice} />
+        <RestartButton onRestart={handleRestart}/>
+        <Notification result={notificationMessage} onClose={() => setNotificationMessage(null)} />
 
       </div>
 
-      <div className='w-full flex lg:w-1/5 pt-6 lg:flex-col flex-row'>
-        <DonutChart wins={wins} losses={losses} />
-        <BarChart userChoiceCounts={userchoiceCounts} computerChoiceCounts={computerchoiceCounts} />
+      <div className='w-full flex lg:w-1/5 pt-48'>
+
+        <ComputerBarChart userChoiceCounts={userchoiceCounts} computerChoiceCounts={computerchoiceCounts} />
       </div>
     </div>
   );

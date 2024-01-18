@@ -2,13 +2,17 @@ import React from 'react';
 import { Snackbar, Alert } from '@mui/material';
 
 const Notification = ({ result, onClose }) => {
-    return (
-        <Snackbar open={!!result} autoHideDuration={3000} onClose={onClose} anchorOrigin={{ vertical: 'center', horizontal: 'center' }}>
-            <Alert severity="info" onClose={onClose} sx={{ width: '100%' }}>
-                {result}
-            </Alert>
-        </Snackbar>
-    );
+  const isSurvivorLevelI = result === 'survivor level I';
+  const isSurvivorLevelII = result === 'survivor level II';
+
+  return (
+    <Snackbar open={!!result} autoHideDuration={3000} onClose={onClose} anchorOrigin={{ vertical: 'center', horizontal: 'center' }}>
+      <Alert severity={isSurvivorLevelI  ? 'success' : 'info'} onClose={onClose} sx={{ width: '100%' }}>
+        {/* {/* {isSurvivorLevelI ? '2 consecutive wins!' : result} */}
+        {isSurvivorLevelII ? '3 consecutive wins!' : result}
+      </Alert>
+    </Snackbar>
+  );
 };
 
 export default Notification;

@@ -20,7 +20,7 @@
   justify-content: space-evenly;
 }
 body {
-  background-color: #282c34;
+  background-color: #075985;
 }
 
 .App-header {
@@ -32,8 +32,6 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #282c34;
-  /* padding-top: 100px;
-  padding-bottom: 100px; */
 }
 
 .App-link {

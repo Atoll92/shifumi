@@ -1,6 +1,5 @@
-// "use client";
 import React, { useState } from "react";
-import logo from '../Assets/logo.svg'
+import logo from '../Assets/svgs/logo.svg'
 
 function Navbar({ session }) {
 
@@ -35,10 +34,10 @@ function Navbar({ session }) {
             width="24"
             height="24"
             stroke="currentColor"
-            stroke-width="2"
+            strokeWidth="2"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className={isOpen ? ("hidden") : ("flex")}
           >
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -50,10 +49,10 @@ function Navbar({ session }) {
             width="24"
             height="24"
             stroke="currentColor"
-            stroke-width="2"
+            strokeWidth="2"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className={isOpen ? ("flex") : ("hidden")}
           >
             <line x1="18" y1="6" x2="6" y2="18"></line>

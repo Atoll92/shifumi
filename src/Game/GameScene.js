@@ -1,35 +1,38 @@
-import React, { useMemo, useRef, useEffect, useState } from 'react';
-import { Canvas, useLoader, useFrame } from '@react-three/fiber';
+import React, { useMemo } from 'react';
+import { Canvas, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
-import { Stats, Circle } from '@react-three/drei';
-import * as THREE from 'three';
+import { Stats , Text} from '@react-three/drei';
 import RotatingAnimatedModel from './RotatingAnimatedModel';
 
-const GameScene = ({ userChoice, computerChoice, isUserLosing, isComputerLosing }) => {
+const GameScene = ({ userChoice, computerChoice, result }) => {
     const userModel = useGltfScene(userChoice);
     const computerModel = useGltfScene(computerChoice);
-
-    const handleAnimationReset = (initialPosition) => {
-        // Reset animation logic goes here
-        // For example, you can reset rotation, position, or any other animation state
-    };
+    const Canvas_height = { height: '400px'  };
 
     return (
-        <Canvas camera={{ position: [0, 0, 0.8] }} shadows>
+        <Canvas style={Canvas_height} className="z-10" camera={{ position: [0, 0, 1.2] }} shadows>
             <directionalLight position={[3.3, 1.0, 4.4]} castShadow intensity={Math.PI * 2} />
             <RotatingAnimatedModel
                 model={userModel}
-                initialPosition={[-2, 0, 0]}
-                isLosing={isUserLosing}
-                onAnimationReset={handleAnimationReset}
+                initialPosition={[-1, -0.5, 0]}
+                animationType={result}
             />
             <RotatingAnimatedModel
                 model={computerModel}
-                initialPosition={[2, 0, 0]}
-                isLosing={isComputerLosing}
-                onAnimationReset={handleAnimationReset}
+                initialPosition={[1, -0.5, 0]}
+                animationType={result === 'lose' ? 'win' : (result === 'win' ? 'lose' : result)}
             />
-            <axesHelper args={[5]} />
+            <Text
+                position={[0, -0.8, 0]}
+                color="#075985"
+                fontSize={0.2}
+                maxWidth={300}
+                lineHeight={1.5}
+                letterSpacing={0.02}
+                textAlign="center"
+            >
+                {getResultMessage(result)}
+            </Text>
             <Stats />
         </Canvas>
     );
@@ -37,8 +40,19 @@ const GameScene = ({ userChoice, computerChoice, isUserLosing, isComputerLosing 
 
 const useGltfScene = (model) => {
     const gltf = useLoader(GLTFLoader, `/models/${model}.glb`);
-    const scene = useMemo(() => gltf.scene.clone(), [gltf]); // Clone the scene to be able to use multiple instances.
+    const scene = useMemo(() => gltf.scene.clone(), [gltf]);
     return scene;
+};
+
+const getResultMessage = (result) => {
+    switch (result) {
+        case 'win':
+            return 'You win!';
+        case 'lose':
+            return 'You lose!';
+        default:
+            return 'Tie!';
+    }
 };
 
 
