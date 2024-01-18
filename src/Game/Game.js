@@ -92,27 +92,15 @@ const Game = () => {
         <UserBarChart userChoiceCounts={userchoiceCounts} />
       </div>
       <div className="flex flex-col w-full lg:w-3/5 order-first md:order-0 lg:order-0 ">
-        {/* <Grid container className="absolute w-3/5 m-auto" spacing={2}>
-          <Grid item xs={6} textAlign="left" className='mx-4 lg:mx0 w-1/2'>
-            <Typography variant="h4" component="div" style={{ fontWeight: 'bold', color: '#0088fe', margin:'20px' }}>
-              Player
-            </Typography>
-          </Grid>
-          <Grid item xs={6} textAlign="right" className='mx-4 lg:mx0 w-1/2'>
-            <Typography variant="h4" component="div" style={{ fontWeight: 'bold', color: '#ff8042', margin:'20px' }}>
-              A.I.
-            </Typography>
-          </Grid>
-        </Grid> */}
         <div className="flex-1 flex flex-row justify-center z-10 p-4 ">
           <Suspense fallback={<Loader />}>{userChoice && computerChoice && (<>
             <GameScene userChoice={userChoice} computerChoice={computerChoice} result={result} />
           </>)}
           </Suspense>
-          <Typography  className="w-full lg:w-3/5 mx-2 lg:mx-0 order-first" variant="h5" component="div" style={{ fontWeight: 'bold', color: '#0088fe', margin:'20px 20px  ' , position:'absolute', textAlign:'left'}}>
+          <Typography  className="w-full lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0" variant="h5" component="div" style={{ fontWeight: 'bold', color: '#0088fe', margin:'20px 20px  ' , position:'absolute', textAlign:'left'}}>
               Player
             </Typography>
-          <Typography  className="w-full lg:w-3/5 mx-2 lg:mx-0 order-first md:order-0" variant="h5" component="div" style={{ fontWeight: 'bold', color: '#ff8042', margin:'20px 20px' , position:'absolute', textAlign:'right'}}>
+          <Typography  className="w-full lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0 " variant="h5" component="div" style={{ fontWeight: 'bold', color: '#ff8042', margin:'20px 20px' , position:'absolute', textAlign:'right'}}>
               Computer
             </Typography>
         </div><>

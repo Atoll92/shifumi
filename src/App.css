@@ -19,6 +19,7 @@
   flex-direction: row;
   justify-content: space-evenly;
 }
+
 body {
   background-color: #075985;
 }
@@ -42,6 +43,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -53,7 +55,8 @@ table {
   width: 100%;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
@@ -69,12 +72,9 @@ th {
   display: flex;
   flex-direction: row;
   padding: 20px;
- 
+
 }
 
-/* button {
-  margin: 20px!important;
-} */
 
 .categoryRow {
   background-color: #0095b37d;
@@ -83,35 +83,9 @@ th {
 
   text-align: left;
   display: inline-block;
- 
+
   white-space: nowrap;
   padding: 0 10px;
   min-width: 100%;
 
 }
-
-.containerz {
-  max-width: 100%;
-  margin: 0 10%;
-}
-
-table {
-  table-layout: fixed;
-}
-
-.boldCell {
-  font-weight: 900;
-  font-size: 14px;
-}
-
-#loginled {
-  width: 80px;
-  height: 80px;
-  fill: greenyellow;
-  position: absolute;
-
-  z-index: 99;
-  top: 63px;
-  right: 0;
-}
-
