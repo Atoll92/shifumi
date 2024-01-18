@@ -11,6 +11,7 @@ import RestartButton from '../Services/Restart';
 
 
 
+
 const Game = () => {
   const [userChoice, setUserChoice] = useState(null);
   const [computerChoice, setComputerChoice] = useState(null);
@@ -82,7 +83,7 @@ const Game = () => {
     console.log('User Choice Counts:', userchoiceCounts);
     console.log('Computer Choice Counts:', computerchoiceCounts);
     if (consecutiveWins >= 2) {
-      setNotificationMessage(result);
+      setNotificationMessage('level I');
       
     } 
     if (consecutiveWins >= 3) {

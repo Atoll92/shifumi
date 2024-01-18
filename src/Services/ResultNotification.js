@@ -1,5 +1,6 @@
 import React from 'react';
 import { Snackbar, Alert } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const Notification = ({ result, onClose }) => {
   const isSurvivorLevelI = result === 'survivor level I';
@@ -14,5 +15,10 @@ const Notification = ({ result, onClose }) => {
     </Snackbar>
   );
 };
+Notification.propTypes = {
+    result: PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,
+ 
+  };
 
 export default Notification;

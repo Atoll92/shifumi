@@ -1,5 +1,6 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Label } from 'recharts';
+import PropTypes from 'prop-types'
 
 const COLORS = ['#0088FE', '#FF8042'];
 
@@ -38,6 +39,11 @@ const DonutChart = ({ wins, losses }) => {
   );
 };
 
+DonutChart.propTypes = {
+  wins: PropTypes.number.isRequired,
+  losses: PropTypes.number.isRequired,
+};
+
 const CustomLabel = ({ data }) => (
   <g>
     {data.map((entry, index) => (
@@ -55,5 +61,9 @@ const CustomLabel = ({ data }) => (
     ))}
   </g>
 );
+
+CustomLabel.propTypes = {
+  data: PropTypes.array.isRequired,
+};
 
 export default DonutChart;

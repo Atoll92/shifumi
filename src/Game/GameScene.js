@@ -1,8 +1,11 @@
+/* eslint-disable react/no-unknown-property */
+
 import React, { useMemo } from 'react';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import { Stats , Text} from '@react-three/drei';
 import RotatingAnimatedModel from './RotatingAnimatedModel';
+import PropTypes from 'prop-types';
 
 const GameScene = ({ userChoice, computerChoice, result }) => {
     const userModel = useGltfScene(userChoice);
@@ -37,6 +40,14 @@ const GameScene = ({ userChoice, computerChoice, result }) => {
         </Canvas>
     );
 };
+
+GameScene.propTypes = {
+    userChoice: PropTypes.string.isRequired,
+    computerChoice : PropTypes.string.isRequired,
+    result : PropTypes.string.isRequired,
+  };
+
+
 
 const useGltfScene = (model) => {
     const gltf = useLoader(GLTFLoader, `/models/${model}.glb`);

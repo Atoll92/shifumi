@@ -1,5 +1,6 @@
 import React from 'react';
 import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import PropTypes from 'prop-types';
 
 const UserBarChart = ({ userChoiceCounts }) => {
   //counts to array 4 Recharts
@@ -16,6 +17,10 @@ const UserBarChart = ({ userChoiceCounts }) => {
       </RechartsBarChart>
     </ResponsiveContainer>
   );
+};
+
+UserBarChart.propTypes = {
+  userChoiceCounts: PropTypes.object.isRequired,
 };
 
 export default UserBarChart;

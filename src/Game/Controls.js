@@ -1,6 +1,7 @@
 // GameCard.js
 import React from 'react';
 import { Card, Button, Grid } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const Controls = ({ UiStyle, handleChoice }) => {
   return (
@@ -15,5 +16,11 @@ const Controls = ({ UiStyle, handleChoice }) => {
     </Card>
   );
 };
+
+
+Controls.propTypes = {
+    UiStyle: PropTypes.object.isRequired,
+    handleChoice : PropTypes.func.isRequired,
+  };
 
 export default Controls;

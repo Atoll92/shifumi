@@ -2,6 +2,7 @@
 import './App.css';
 import Navbar from './Components/Navbar';
 import Game from './Game/Game';
+import React from 'react';
 
 function App() {
   return (

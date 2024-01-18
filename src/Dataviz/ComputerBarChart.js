@@ -1,5 +1,6 @@
 import React from 'react';
 import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { PropTypes } from 'prop-types';
 
 const ComputerBarChart = ({computerChoiceCounts }) => {
   //counts to array 4 Recharts
@@ -17,5 +18,10 @@ const ComputerBarChart = ({computerChoiceCounts }) => {
     </ResponsiveContainer>
   );
 };
+
+ComputerBarChart.propTypes = {
+  computerChoiceCounts: PropTypes.object.isRequired,
+};
+
 
 export default ComputerBarChart;

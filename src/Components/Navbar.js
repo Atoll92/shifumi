@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from '../Assets/svgs/logo.svg'
 
-function Navbar({ session }) {
+function Navbar() {
 
   const [isOpen, setIsOpen] = useState(false);
 
