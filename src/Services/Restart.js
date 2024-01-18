@@ -16,8 +16,6 @@ const RestartButton = ({ onRestart }) => {
 
 RestartButton.propTypes = {
     onRestart: PropTypes.func.isRequired,
-
 };
-
 
 export default RestartButton;

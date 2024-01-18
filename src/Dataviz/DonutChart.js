@@ -54,8 +54,8 @@ const CustomLabel = ({ data }) => (
         textAnchor="middle"
         dominantBaseline="middle"
         fill={COLORS[index % COLORS.length]}
-        fontSize="min(5vw,50px)"
-
+        fontSize="min(5vw,60px)"
+        fontWeight={900}
       >
         {`${entry.value}`}
       </text>

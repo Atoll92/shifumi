@@ -4,16 +4,13 @@ import { Suspense } from 'react';
 import GameScene from './GameScene';
 import DonutChart from '../Dataviz/DonutChart';
 import Controls from './Controls';
-import UserBarChart from '../Dataviz/UserBarChart';
-import ComputerBarChart from '../Dataviz/ComputerBarChart';
 import RestartButton from '../Services/Restart';
 import MuteButton from './MuteButton';
 import { Stack } from '@mui/material';
 import tie from '../Assets/sounds/tie.mp3';
 import win from '../Assets/sounds/win.mp3';
 import lose from '../Assets/sounds/lose.mp3';
-
-// 
+import BarChart from '../Dataviz/BarChart';
 
 const Game = () => {
   const [userChoice, setUserChoice] = useState(null);
@@ -83,37 +80,37 @@ const Game = () => {
     setControlsKey((prevKey) => prevKey + 1);
   };
 
-  const UiStyle = { background: 'transparent', color: 'white', padding: '20px', margin: 'auto' };
+  const ControlsStyle = { background: 'transparent', color: 'white', padding: '20px', margin: 'auto' };
 
   return (
     <div className='flex lg:flex-row  pt-5 pb-5 relative z-0 flex-col bg-orange-50'>
       <div className='w-full flex pt-0 lg:w-1/5  lg:order-first  sm:pt-0 lg:pt-48'>
-        <UserBarChart userChoiceCounts={userchoiceCounts} />
+        <BarChart data={userchoiceCounts} fillColor='#0088FE' name='Player' />
       </div>
       <div className="flex flex-col w-full lg:w-3/5 order-first md:order-0 lg:order-0 ">
         <div className="flex-1 flex flex-row justify-center z-10 p-4 ">
-          <Suspense fallback={<Loader />}>{userChoice && computerChoice &&
+          <Suspense fallback={<Loader/>}>{userChoice && computerChoice &&
             <GameScene userChoice={userChoice} computerChoice={computerChoice} result={result} />
           }
           </Suspense>
           {userChoice && <>
-            <h5 className="w-full text-lg md:text-2xl lg:text-4xl  lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0" style={{ fontWeight: 'bold', color: '#0088fe', margin: '20px 20px  ', position: 'absolute', textAlign: 'left' }}>
+            <h5 className="w-full text-lg md:text-2xl lg:text-4xl lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0" style={{ fontWeight: 'bold', color: '#0088fe', margin: '20px 20px  ', position: 'absolute', textAlign: 'left' }}>
               Player
             </h5>
-            <h5 className="w-full text-lg md:text-2xl lg:text-4xl lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0 "  style={{ fontWeight: 'bold', color: '#ff8042', margin: '20px 20px', position: 'absolute', textAlign: 'right' }}>
+            <h5 className="w-full text-lg md:text-2xl lg:text-4xl lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0 " style={{ fontWeight: 'bold', color: '#ff8042', margin: '20px 20px', position: 'absolute', textAlign: 'right' }}>
               Computer
             </h5>
           </>}
         </div>
         <DonutChart wins={wins} losses={losses} />
-        <Controls key={controlsKey} className="m-auto" UiStyle={UiStyle} handleChoice={handleChoice} isMuted={isMuted} onToggleMute={handleToggleMute} />
+        <Controls key={controlsKey} className="m-auto p-4 text-white" UiStyle={ControlsStyle} handleChoice={handleChoice} isMuted={isMuted} onToggleMute={handleToggleMute} />
         <Stack style={{ flexDirection: 'row' }} className='m-auto flex flex-row w-1/2 h-48' spacing={2}>
           <RestartButton onRestart={handleRestart} />
           <MuteButton isMuted={isMuted} onToggleMute={handleToggleMute} />
         </Stack>
       </div>
       <div className='w-full flex lg:w-1/5 pt-0 lg:pt-48'>
-        <ComputerBarChart userChoiceCounts={userchoiceCounts} computerChoiceCounts={computerchoiceCounts} />
+        <BarChart data={computerchoiceCounts} fillColor='#FF8042' name='Computer' />
       </div>
     </div>
   );
