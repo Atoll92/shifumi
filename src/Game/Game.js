@@ -101,12 +101,12 @@ const Game = () => {
 
   return (
     <div className='flex lg:flex-row  pt-5 flex-col bg-orange-50'>
-      <div className='w-1/2 flex lg:w-1/5 pt-48 md:flex-col-reverse"'>
+      <div className='w-full flex lg:w-1/5  lg:order-first pt-48'>
             <UserBarChart userChoiceCounts={userchoiceCounts} />
       </div>
-      <div  className="flex flex-col w-full lg:w-3/5 md:order-fast ">
+      <div  className="flex flex-col w-full lg:w-3/5 sm:order-first md:order-0 lg:order-0 ">
 
-        <div className="flex-1 flex flex-row justify-center z-10 p-4">
+        <div className="flex-1 flex flex-row justify-center z-10 p-4 ">
           
           <Suspense fallback={<Loader />}>{userChoice && computerChoice && (<>
             <GameScene userChoice={userChoice} computerChoice={computerChoice} result={result} />
