@@ -9,7 +9,6 @@ function App() {
     <div className="App">
       <header className="App-header mb-2">
         <Navbar />
-
       </header>
       <Game />
     </div>
