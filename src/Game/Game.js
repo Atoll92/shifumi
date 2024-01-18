@@ -22,6 +22,7 @@ const Game = () => {
   const [computerchoiceCounts, setComputerChoiceCounts] = useState({});
   const [consecutiveWins, setConsecutiveWins] = useState(0);
   const [notificationMessage, setNotificationMessage] = useState(null);
+  const [controlsKey, setControlsKey] = useState(0);
 
 
 
@@ -72,6 +73,7 @@ const Game = () => {
     setLosses(0);
     setUserChoiceCounts({});
     setComputerChoiceCounts({});
+    setControlsKey((prevKey) => prevKey + 1);
   };
 
 
@@ -101,11 +103,11 @@ const Game = () => {
   const UiStyle = { background: 'transparent', color: 'white', padding: '20px', margin:'auto' };
 
   return (
-    <div className='flex lg:flex-row  pt-5 flex-col bg-orange-50'>
+    <div className='flex lg:flex-row  pt-5 pb-5 relative z-0 flex-col bg-orange-50'>
       <div className='w-full flex lg:w-1/5  lg:order-first pt-48'>
             <UserBarChart userChoiceCounts={userchoiceCounts} />
       </div>
-      <div  className="flex flex-col w-full lg:w-3/5 sm:order-first md:order-0 lg:order-0 ">
+      <div  className="flex flex-col w-full lg:w-3/5 order-first md:order-0 lg:order-0 ">
 
         <div className="flex-1 flex flex-row justify-center z-10 p-4 ">
           
@@ -119,7 +121,7 @@ const Game = () => {
 
         <DonutChart wins={wins} losses={losses} />
 
-        <Controls className="m-auto" UiStyle={UiStyle} handleChoice={handleChoice} />
+        <Controls key={controlsKey} className="m-auto" UiStyle={UiStyle} handleChoice={handleChoice} />
         <RestartButton onRestart={handleRestart}/>
         <Notification result={notificationMessage} onClose={() => setNotificationMessage(null)} />
 

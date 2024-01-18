@@ -25,7 +25,7 @@ function Navbar() {
         <h1 className="text-4xl font-bold text-sky-800">SHIFUMI</h1>
       </div>
       <nav className={isOpen ? ("flex") : (" hidden md:flex")}>
-        <ul className="flex bg-inherit absolute md:relative flex-col md:flex-row w-full shadow md:shadow-none text-center top-12 left-0 md:top-0 md:flex">{listItems}</ul>
+        <ul className="flex bg-white absolute md:relative flex-col md:flex-row w-full shadow md:shadow-none text-center top-28 z-10 left-0 md:top-0 md:flex">{listItems}</ul>
       </nav>
       <div className="md:hidden">
         <button className="flex justify-center items-center" onClick={toggleNavbar}>
