@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: sans-serif;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url();
+}
+
 .App {
   text-align: center;
 }
@@ -89,3 +98,4 @@ th {
   min-width: 100%;
 
 }
+

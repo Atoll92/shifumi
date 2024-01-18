@@ -9,7 +9,6 @@ import ComputerBarChart from '../Dataviz/ComputerBarChart';
 import RestartButton from '../Services/Restart';
 import MuteButton from './MuteButton';
 import { Stack } from '@mui/material';
-import { Typography } from '@mui/material';
 import tie from '../Assets/sounds/tie.mp3';
 import win from '../Assets/sounds/win.mp3';
 import lose from '../Assets/sounds/lose.mp3';
@@ -55,22 +54,22 @@ const Game = () => {
 
     if (choice === computerChoice) { //tie
       setResult("tie");
-      if(!isMuted){sounds.tie.play()}
+      if (!isMuted) { sounds.tie.play() }
     } else if (
       (choice === 'rock' && computerChoice === 'scissors') ||
       (choice === 'paper' && computerChoice === 'rock') ||
       (choice === 'scissors' && computerChoice === 'paper')
     ) { //win
       setResult('win');
-      if(!isMuted){sounds.win.play()}
+      if (!isMuted) { sounds.win.play() }
       setWins((prevWins) => prevWins + 1);
-      }
-      else { //lose
+    }
+    else { //lose
       setResult('lose');
-      if(!isMuted){sounds.lose.play()}
+      if (!isMuted) { sounds.lose.play() }
       setLosses((prevLosses) => prevLosses + 1);
     }
-    
+
   };
 
   const handleRestart = () => {
@@ -93,19 +92,19 @@ const Game = () => {
       </div>
       <div className="flex flex-col w-full lg:w-3/5 order-first md:order-0 lg:order-0 ">
         <div className="flex-1 flex flex-row justify-center z-10 p-4 ">
-          <Suspense fallback={<Loader />}>{userChoice && computerChoice && (<>
+          <Suspense fallback={<Loader />}>{userChoice && computerChoice &&
             <GameScene userChoice={userChoice} computerChoice={computerChoice} result={result} />
-          </>)}
+          }
           </Suspense>
-          <Typography  className="w-full lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0" variant="h5" component="div" style={{ fontWeight: 'bold', color: '#0088fe', margin:'20px 20px  ' , position:'absolute', textAlign:'left'}}>
+          {userChoice && <>
+            <h5 className="w-full text-lg md:text-2xl lg:text-4xl  lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0" style={{ fontWeight: 'bold', color: '#0088fe', margin: '20px 20px  ', position: 'absolute', textAlign: 'left' }}>
               Player
-            </Typography>
-          <Typography  className="w-full lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0 " variant="h5" component="div" style={{ fontWeight: 'bold', color: '#ff8042', margin:'20px 20px' , position:'absolute', textAlign:'right'}}>
+            </h5>
+            <h5 className="w-full text-lg md:text-2xl lg:text-4xl lg:w-3/5 mx-2 p-4 lg:p-0 lg:mx-0 "  style={{ fontWeight: 'bold', color: '#ff8042', margin: '20px 20px', position: 'absolute', textAlign: 'right' }}>
               Computer
-            </Typography>
-        </div><>
-        
-            </>
+            </h5>
+          </>}
+        </div>
         <DonutChart wins={wins} losses={losses} />
         <Controls key={controlsKey} className="m-auto" UiStyle={UiStyle} handleChoice={handleChoice} isMuted={isMuted} onToggleMute={handleToggleMute} />
         <Stack style={{ flexDirection: 'row' }} className='m-auto flex flex-row w-1/2 h-48' spacing={2}>

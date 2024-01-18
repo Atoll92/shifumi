@@ -54,22 +54,12 @@ const CustomLabel = ({ data }) => (
         textAnchor="middle"
         dominantBaseline="middle"
         fill={COLORS[index % COLORS.length]}
-        fontSize="63px"
+        fontSize="min(5vw,50px)"
+
       >
-         {/* {`${index === 0 ? 'Player' : ''}`}  */}
         {`${entry.value}`}
-        {/* {`${index === 0 ? '' : 'A.I.'}`}  */}
-             </text>
+      </text>
     ))}
-    {/* <text
-     key={`playerlabel`}
-     x={'35%'}
-     y={`20%`}
-     textAnchor="middle"
-     dominantBaseline="middle"
-     fill={"#0088FE"}
-     fontSize="63px"
-     >Player</text> */}
   </g>
 );
 
