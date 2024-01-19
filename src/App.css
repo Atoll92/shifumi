@@ -20,14 +20,6 @@
   pointer-events: none;
 }
 
-.admin-panel {
-  position: sticky;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
 body {
   background-color: #075985;
 }
@@ -42,51 +34,4 @@ body {
   color: #282c34;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th,
-td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-  font-size: 12px;
-}
-
-th {
-  background-color: #0095b3;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-  padding: 20px;
-}
-
-.categoryRow {
-  background-color: #0095b37d;
-  font-weight: bold;
-  font-size: calc(18px);
-  text-align: left;
-  display: inline-block;
-  white-space: nowrap;
-  padding: 0 10px;
-  min-width: 100%;
-}
