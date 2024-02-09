@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from '../Assets/svgs/logo.svg'
+// import logo from '../Assets/svgs/logo.svg'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -28,7 +28,8 @@ function Navbar() {
   return (
     <div className="container relative m-auto p-3 flex justify-between items-center">
       <div>
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        <h1 className="title">double geste</h1>
         <h1 className="text-4xl font-bold text-sky-800">SHIFUMI</h1>
       </div>
       <nav className={mobileMenuOpen ? ("flex") : (" hidden md:flex")}>
